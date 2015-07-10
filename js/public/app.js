@@ -280,6 +280,17 @@ app.filter('noteTitle', function () {
 	};
 });
 
+app.filter('wordCount', function () {
+	'use strict';
+	return function (value) {
+		if (value && (typeof value === 'string')) {
+			return value.trim().split(/\s+/).length;
+		} else {
+			return 0;
+		}
+	};
+});
+
 app.factory('Config', ["Restangular", function (Restangular) {
     'use strict';
 
@@ -367,7 +378,7 @@ app.factory('NotesModel', function () {
 
     return new NotesModel();
 });
-app.factory('SaveQueue', ["$q", "$filter", function($q, $filter) {
+app.factory('SaveQueue', ["$q", function($q) {
     'use strict';
 
     var SaveQueue = function () {
@@ -412,7 +423,7 @@ app.factory('SaveQueue', ["$q", "$filter", function($q, $filter) {
             });
         },
         _noteUpdateRequest: function (note, response) {
-            note.title = $filter('noteTitle')(response.title);
+            note.title = response.title;
             note.modified = response.modified;
         },
         isSaving: function () {
@@ -422,6 +433,5 @@ app.factory('SaveQueue', ["$q", "$filter", function($q, $filter) {
 
     return new SaveQueue();
 }]);
-
 
 })(angular, jQuery, oc_requesttoken, marked, hljs);
