@@ -76,7 +76,7 @@
 /* special styling to make textarea subtle and fit the window */
 #app-content pre {
     display: block;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     margin: 0;
     margin-bottom: -50px;
@@ -90,7 +90,7 @@
 }
 
 #app-content .note-meta {
-    padding: 0 30px;
+    padding: 0 30px 30px;
     opacity: .2;
     -ms-user-select: none;
     -moz-user-select: none;
